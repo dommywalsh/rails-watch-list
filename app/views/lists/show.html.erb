@@ -5,6 +5,7 @@
   <li><h4><%=bookmark.movie.title%></h4></li>
   <h5><%=bookmark.movie.overview%></h5>
   <p><%=bookmark.comment%></p>
+  <%# <%= cl_image_tag bookmark.photo.key, height: 300, width: 400, crop: :fill %>
   <%= link_to "Delete",
     bookmark_path(bookmark),
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
