@@ -2,16 +2,21 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://wallpaperaccess.com/full/895179.jpg">
   <div class="container">
     <h1>The #1 movie repository</h1>
-    <p>The world's best movies at your fingertips</p>
+    <p>Bookmark and save all your favourite movies</p>
     <a class="btn btn-primary" href="#">Apply now</a>
   </div>
 </div>
 
-<div class="container mt-4 ">
-  <div class="cards d-grid p-2">
-  <% @lists.each do |list| %>
-    <div class="card-category"><%=link_to list.name, list_path(list)%>
-    </div>
-  <% end %>
+<div class="lists-container">
+  <div class="row">
+    <% @lists.each do |list| %>
+      <div class="co-12 col-sm-6 col-md-4 mb-3">
+        <%= link_to list_path(list), class:"text-decoration-none" do %>
+          <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : asset_path('image_not_found.jpeg') %>)">
+            <%= list.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

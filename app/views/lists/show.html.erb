@@ -1,16 +1,27 @@
-<h1><%=@list.name%></h1>
+<div class="show-page-container">
 
-<ul>
-<% @bookmarks.each do |bookmark| %>
-  <li><h4><%=bookmark.movie.title%></h4></li>
-  <h5><%=bookmark.movie.overview%></h5>
-  <p><%=bookmark.comment%></p>
-  <%# <%= cl_image_tag bookmark.photo.key, height: 300, width: 400, crop: :fill %>
-  <%= link_to "Delete",
-    bookmark_path(bookmark),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %>
-<% end %>
-</ul>
+  <h1><%=@list.name%></h1>
 
-<%= link_to("new movie(bookmark)", new_list_bookmark_path(@list)) %>
+
+  <div class="row">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="co-12 col-sm-6 col-md-4 mb-3">
+          <div class="card-category" data-aos="zoom-in"
+            style="background-image: linear-gradient(rgba(0,0,0,0.3),
+            rgba(0,0,0,0.3)), url(<%= bookmark.movie.photo.attached? ?
+            cl_image_path(bookmark.movie.photo.key) : asset_path('image_not_found.jpeg') %>)">
+            <%= bookmark.movie.title%>
+          </div>
+          <%= link_to "Delete",
+              bookmark_path(bookmark),
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            %>
+      </div>
+    <% end %>
+  </div>
+
+
+  </ul>
+
+  <%= link_to("new movie(bookmark)", new_list_bookmark_path(@list)) %>
+</div>
